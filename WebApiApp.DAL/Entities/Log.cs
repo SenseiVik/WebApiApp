@@ -7,16 +7,21 @@ namespace WebApiApp.DAL.Entities
     using System.Data.Entity.Spatial;
 
     [Table("Log")]
-    public partial class Log
+    public class Log
     {
         public int Id { get; set; }
 
-        [Required]
+        [Column(TypeName = "date")]
+        public DateTime Date { get; set; }
+
         [StringLength(100)]
         public string Request { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string Response { get; set; }
+        public string RequestMethod { get; set; }
+
+        public int ResponseDataCount { get; set; }
+
+        public int ResponseStatus { get; set; }
     }
 }

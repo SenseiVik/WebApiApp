@@ -24,6 +24,10 @@
                     <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
                 </ul>
             </div>
+            <div class="userInfo">
+                <p>Sign in: <span class="userName"></span></p>
+                <input type="button" value="Log out" id="logOut" />
+            </div>
         </div>
     </div>
     <div class="container body-content">
@@ -37,5 +41,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/auth.js"></script>
 </body>
 </html>
