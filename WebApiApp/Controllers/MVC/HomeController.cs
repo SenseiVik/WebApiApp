@@ -6,18 +6,12 @@ using System.Web.Mvc;
 
 namespace WebApiApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-
-            return View();
-        }
-
-        public ActionResult Register()
-        {
-            ViewBag.Title = "Register Page";
 
             return View();
         }

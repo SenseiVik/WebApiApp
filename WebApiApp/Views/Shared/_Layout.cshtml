@@ -19,14 +19,20 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav ">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
                 </ul>
-            </div>
-            <div class="userInfo">
-                <p>Sign in: <span class="userName"></span></p>
-                <input type="button" value="Log out" id="logOut" />
+                <ul class="nav navbar-nav navbar-btn navbar-right userInfo">
+                    <li class="text-info">
+                        <div class="row">
+                            <div class="col-lg-9"><span class="userName navbar-btn"></span></div>
+                            <div class="col-lg-3"><input type="button" value="Log out" id="logOut" class="btn btn-danger text-right" /></div>
+                        </div>
+                        
+
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

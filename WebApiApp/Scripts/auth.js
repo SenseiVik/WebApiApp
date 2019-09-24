@@ -1,10 +1,10 @@
-﻿var token
+﻿var tokenKey = "tokenInfo";
 
 $("#signin").on("click", function () {
     var loginData = {
-        grand_type: "password",
-        Email: $("#signInEmail").val(),
-        Password: $("#signInPassword").val()
+        grant_type: "password",
+        username: $("#signInEmail").val(),
+        password: $("#signInPassword").val()
     };
 
     $.ajax({
@@ -12,12 +12,16 @@ $("#signin").on("click", function () {
         url: "/Token",
         data: loginData,
 
-        success: function () {
+        success: function (data) {
+            $('.userName').text(data.userName);
 
+            sessionStorage.setItem(tokenKey, data.access_token);
+
+            window.location.href = "/Home/Index";
         },
 
-        error: function () {
-
+        error: function (data) {
+            alert(data.responseText);
         }
     });
 });
@@ -38,7 +42,7 @@ $("#register").on("click", function () {
         success: function (data) {
             alert("Done");
 
-            window.location.href = "/Home/Index";
+            window.location.href = "/Auth/LogIn";
         },
 
         error: function (data) {
@@ -46,4 +50,9 @@ $("#register").on("click", function () {
         }
     });
 
+});
+
+$("#logOut").click(function () {
+    sessionStorage.removeItem(tokenKey);
+    window.location.href = "/Auth/LogIn";
 });
