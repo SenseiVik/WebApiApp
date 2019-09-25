@@ -53,6 +53,21 @@ $("#register").on("click", function () {
 });
 
 $("#logOut").click(function () {
-    sessionStorage.removeItem(tokenKey);
-    window.location.href = "/Auth/LogIn";
+
+    $.ajax({
+        url: "/api/Account/Logout",
+        type: "POST",
+        contentType: "application/json",
+        headers: { "Authorization": `Bearer ${localStorage.getItem(tokenKey)}` },
+
+        success: function (data) {
+            sessionStorage.removeItem(tokenKey);
+            window.location.href = "/Auth/LogIn";
+        },
+
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+
 });
