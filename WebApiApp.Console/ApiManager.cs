@@ -12,75 +12,32 @@ namespace WebApiApp.Console
     {
         HttpClient client;
         string APP_PATH;
-        LogDb logDb;
 
         public ApiManager(string APP_PATH, HttpClient client)
         {
             this.client = client;
             this.APP_PATH = APP_PATH;
-
-            logDb = new LogDb();
         }
 
         public string GetDateRanges()
         {
-            var request = APP_PATH + "/api/dateranges";
-            var response = client.GetAsync(request).Result;
-            var data = response.Content.ReadAsStringAsync().Result;
-
-            Log log = new Log()
-            {
-                Date = DateTime.Now,
-                Request = request,
-                RequestMethod = "GET",
-                ResponseStatus = (int)response.StatusCode,
-                ResponseDataCount = data.Length
-            };
-            logDb.Add(log);
-            logDb.Save();
-
-            return data;
+            var response = client.GetAsync(APP_PATH + "/api/dateranges").Result;
+            return response.Content.ReadAsStringAsync().Result;
         }
 
         public string AddDateRange(string from, string to)
         {
-            var request = APP_PATH + "/api/dateranges";
             var content = new { from = from, to = to };
-            var response = client.PostAsJsonAsync(request, content);
-            var data = response.Result.Content.ReadAsStringAsync().Result;
+            var response = client.PostAsJsonAsync(APP_PATH + "/api/dateranges", content);
 
-            Log log = new Log()
-            {
-                Date = DateTime.Now,
-                Request = request,
-                RequestMethod = "GET",
-                ResponseStatus = (int)response.Result.StatusCode,
-                ResponseDataCount = data.Length
-            };
-            logDb.Add(log);
-            logDb.Save();
-
-            return data;
+            return response.Result.Content.ReadAsStringAsync().Result;
         }
 
         public string GetDateRanges(string from, string to)
         {
-            var request = $"{APP_PATH}/api/dateranges?from={from}&to={to}";
-            var response = client.GetAsync(request).Result;
-            var data = response.Content.ReadAsStringAsync().Result;
+            var response = client.GetAsync($"{APP_PATH}/api/dateranges?from={from}&to={to}").Result;
 
-            Log log = new Log()
-            {
-                Date = DateTime.Now,
-                Request = request,
-                RequestMethod = "GET",
-                ResponseStatus = (int)response.StatusCode,
-                ResponseDataCount = data.Length
-            };
-            logDb.Add(log);
-            logDb.Save();
-
-            return data;
+            return response.Content.ReadAsStringAsync().Result;
         }
     }
 }

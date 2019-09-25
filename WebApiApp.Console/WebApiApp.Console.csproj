@@ -51,8 +51,6 @@
   <ItemGroup>
     <Compile Include="ApiManager.cs" />
     <Compile Include="AuthorizationManager.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="LogDb.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
