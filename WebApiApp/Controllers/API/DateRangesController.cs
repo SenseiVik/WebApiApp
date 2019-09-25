@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,17 +12,16 @@ using WebApiApp.DAL.Repositories;
 
 namespace WebApiApp.Controllers.API
 {
+    [Authorize]
     public class DateRangesController : ApiController
     {
         private DateRangeRepository _dateRangeRepository;
         private LogRepository _logRepository;
 
-        public DateRangesController()
+        public DateRangesController(DbContext db)
         {
-            WebApiAppContext context = new WebApiAppContext();
-
-            this._dateRangeRepository = new DateRangeRepository(context);
-            this._logRepository = new LogRepository(context);
+            this._dateRangeRepository = new DateRangeRepository(db);
+            this._logRepository = new LogRepository(db);
         }
 
         // GET: api/DateRages
