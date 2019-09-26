@@ -36,7 +36,7 @@ namespace WebApiApp.Console
 
             System.Console.WriteLine();
             string values = apiManager.GetDateRanges();
-            System.Console.WriteLine("Values: ");
+            System.Console.WriteLine("All Values: ");
             System.Console.WriteLine(values);
 
             //System.Console.WriteLine();
@@ -45,6 +45,7 @@ namespace WebApiApp.Console
             //System.Console.WriteLine(apiManager.AddDateRange("2018-01-03", "2018-01-05"));
 
             System.Console.WriteLine();
+            System.Console.WriteLine("Values: ");
             System.Console.WriteLine(apiManager.GetDateRanges("2018-01-04", "2018-02-03"));
 
         }
