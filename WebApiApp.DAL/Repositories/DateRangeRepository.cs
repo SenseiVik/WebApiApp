@@ -4,8 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebApiApp.DAL.Abstract;
 using WebApiApp.DAL.Entities;
+using GenericRepository;
 
 namespace WebApiApp.DAL.Repositories
 {

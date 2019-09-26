@@ -50,10 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\BaseRepository.cs" />
     <Compile Include="Entities\DateRange.cs" />
     <Compile Include="Entities\Log.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Context\WebApiAppContext.cs" />
     <Compile Include="Repositories\DateRangeRepository.cs" />
@@ -63,6 +61,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\GenericRepository\GenericRepository.csproj">
+      <Project>{B8791DAF-74FF-4F87-A3BF-E4DEB3BE6BE4}</Project>
+      <Name>GenericRepository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

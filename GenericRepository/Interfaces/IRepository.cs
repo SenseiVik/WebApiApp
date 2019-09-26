@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApiApp.DAL.Interfaces
+namespace GenericRepository.Interfaces
 {
-    interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class
     {
         IQueryable<TEntity> GetAll();
         TEntity Get(int id);

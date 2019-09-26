@@ -330,8 +330,16 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebApiApp.BOL.Service\WebApiApp.BOL.Service.csproj">
+      <Project>{62F37D93-D3FB-480B-BDBC-6B4FD5CEA6F8}</Project>
+      <Name>WebApiApp.BOL.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApiApp.BOL\WebApiApp.BOL.csproj">
+      <Project>{09CA4B0E-0425-49B3-800E-1457B6339B1C}</Project>
+      <Name>WebApiApp.BOL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebApiApp.DAL\WebApiApp.DAL.csproj">
-      <Project>{29b21c57-3bac-4780-9426-20c570dc8155}</Project>
+      <Project>{29B21C57-3BAC-4780-9426-20C570DC8155}</Project>
       <Name>WebApiApp.DAL</Name>
     </ProjectReference>
   </ItemGroup>

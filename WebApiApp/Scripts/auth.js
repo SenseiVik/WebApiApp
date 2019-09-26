@@ -58,7 +58,10 @@ $("#logOut").click(function () {
         url: "/api/Account/Logout",
         type: "POST",
         contentType: "application/json",
-        headers: { "Authorization": `Bearer ${localStorage.getItem(tokenKey)}` },
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
 
         success: function (data) {
             sessionStorage.removeItem(tokenKey);

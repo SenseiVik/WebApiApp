@@ -13,7 +13,12 @@ namespace WebApiApp.App_Start
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
     using Ninject.Web.WebApi;
+    using WebApiApp.BOL.DTO;
+    using WebApiApp.BOL.Service.Interfaces;
+    using WebApiApp.BOL.Service.Mappers;
+    using WebApiApp.BOL.Service.Services;
     using WebApiApp.DAL.Context;
+    using WebApiApp.DAL.Entities;
 
     public static class NinjectWebCommon 
     {
@@ -65,6 +70,10 @@ namespace WebApiApp.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<DateRangeDTOService>().To<DateRangeDTOService>();
+            kernel.Bind<LogDTOService>().To<LogDTOService>();
+            kernel.Bind<IMapper<Log, LogDTO>>().To<LogMapper>();
+            kernel.Bind<IMapper<DateRange, DateRangeDTO>>().To<DateRangeMapper>();
             kernel.Bind<DbContext>().To<WebApiAppContext>();
         }        
     }

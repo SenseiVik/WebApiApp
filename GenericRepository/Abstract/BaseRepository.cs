@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebApiApp.DAL.Interfaces;
+using GenericRepository.Interfaces;
 
-namespace WebApiApp.DAL.Abstract
+namespace GenericRepository
 {
     public class BaseRepository<TEntity> : IRepository<TEntity>, IDisposable where TEntity : class
     {

@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{50425DC1-584C-44C0-86BE-C4DC7CEBF9A9}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>WebApiApp.Console</RootNamespace>
-    <AssemblyName>WebApiApp.Console</AssemblyName>
+    <ProjectGuid>{62F37D93-D3FB-480B-BDBC-6B4FD5CEA6F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApiApp.BOL.Service</RootNamespace>
+    <AssemblyName>WebApiApp.BOL.Service</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,14 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,16 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\ApiManager.cs" />
-    <Compile Include="Api\AuthorizationManager.cs" />
-    <Compile Include="Database\Log.cs" />
-    <Compile Include="Database\LogDb.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Interfaces\IEntityService.cs" />
+    <Compile Include="Interfaces\IMapper.cs" />
+    <Compile Include="Mappers\DateRangeMapper.cs" />
+    <Compile Include="Mappers\LogMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DateRangeDTOService.cs" />
+    <Compile Include="Services\LogDTOService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\GenericRepository\GenericRepository.csproj">
+      <Project>{B8791DAF-74FF-4F87-A3BF-E4DEB3BE6BE4}</Project>
+      <Name>GenericRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApiApp.BOL\WebApiApp.BOL.csproj">
+      <Project>{09CA4B0E-0425-49B3-800E-1457B6339B1C}</Project>
+      <Name>WebApiApp.BOL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApiApp.DAL\WebApiApp.DAL.csproj">
+      <Project>{29B21C57-3BAC-4780-9426-20C570DC8155}</Project>
+      <Name>WebApiApp.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

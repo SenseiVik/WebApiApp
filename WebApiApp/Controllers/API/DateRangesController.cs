@@ -1,34 +1,29 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using WebApiApp.DAL.Context;
-using WebApiApp.DAL.Entities;
-using WebApiApp.DAL.Repositories;
+using WebApiApp.BOL.DTO;
+using WebApiApp.BOL.Service.Services;
 
 namespace WebApiApp.Controllers.API
 {
     [Authorize]
     public class DateRangesController : ApiController
     {
-        private DateRangeRepository _dateRangeRepository;
-        private LogRepository _logRepository;
+        private DateRangeDTOService dateRangeDTOService;
+        private LogDTOService logDTOService;
 
-        public DateRangesController(DbContext db)
+        public DateRangesController(DateRangeDTOService dateRangeService, LogDTOService logService)
         {
-            this._dateRangeRepository = new DateRangeRepository(db);
-            this._logRepository = new LogRepository(db);
+            this.dateRangeDTOService = dateRangeService;
+            this.logDTOService = logService;
         }
 
         // GET: api/DateRages
         public IHttpActionResult Get()
         {
             IHttpActionResult response;
-            Log log = new Log()
+            LogDTO log = new LogDTO()
             {
                 Request = Request.RequestUri.PathAndQuery,
                 Date = DateTime.Now,
@@ -37,7 +32,7 @@ namespace WebApiApp.Controllers.API
 
             try
             {
-                var ranges = _dateRangeRepository.GetAll();
+                var ranges = dateRangeDTOService.GetAll();
 
                 log.ResponseStatus = (int)HttpStatusCode.OK;
                 log.ResponseDataCount = ranges.Count();
@@ -51,8 +46,8 @@ namespace WebApiApp.Controllers.API
                 response = BadRequest(ex.Message);
             }
 
-            _logRepository.Create(log);
-            _logRepository.Save();
+            logDTOService.Add(log);
+            logDTOService.Save();
 
             return response;
         }
@@ -61,8 +56,8 @@ namespace WebApiApp.Controllers.API
         public IHttpActionResult Get(DateTime from, DateTime to)
         {
             IHttpActionResult response;
-            DateRange value = new DateRange { From = from, To = to };
-            Log log = new Log()
+            DateRangeDTO value = new DateRangeDTO { From = from, To = to };
+            LogDTO log = new LogDTO()
             {
                 Date = DateTime.Now,
                 Request = Request.RequestUri.PathAndQuery,
@@ -71,7 +66,7 @@ namespace WebApiApp.Controllers.API
 
             try
             {
-                var ranges = _dateRangeRepository
+                var ranges = dateRangeDTOService
                                         .GetAll()
                                         .Where(range => value.From <= range.To && value.To >= range.To);
                 
@@ -87,17 +82,17 @@ namespace WebApiApp.Controllers.API
                 response = BadRequest(ex.Message);
             }
 
-            _logRepository.Create(log);
-            _logRepository.Save();
+            logDTOService.Add(log);
+            logDTOService.Save();
 
             return response;
         }
 
         // POST: api/DateRages
-        public IHttpActionResult Post([FromBody]DateRange value)
+        public IHttpActionResult Post([FromBody]DateRangeDTO value)
         {
             IHttpActionResult response;
-            Log log = new Log()
+            LogDTO log = new LogDTO()
             {
                 Date = DateTime.Now,
                 Request = Request.RequestUri.PathAndQuery,
@@ -108,7 +103,7 @@ namespace WebApiApp.Controllers.API
             {
                 if (value.Id == 0)
                 {
-                    var data = _dateRangeRepository.Create(value);
+                    var data = dateRangeDTOService.Add(value);
                     response = Created("database", value);
 
                     log.ResponseDataCount = 1;
@@ -116,13 +111,13 @@ namespace WebApiApp.Controllers.API
                 }
                 else
                 {
-                    _dateRangeRepository.Update(value);
+                    dateRangeDTOService.Update(value);
                     response = Ok(value);
 
                     log.ResponseStatus = (int)HttpStatusCode.OK;
                 }
 
-                _dateRangeRepository.Save();
+                dateRangeDTOService.Save();
             }
             catch (Exception ex)
             {
@@ -131,8 +126,8 @@ namespace WebApiApp.Controllers.API
                 log.ResponseStatus = (int)HttpStatusCode.BadRequest;
             }
 
-            _logRepository.Create(log);
-            _logRepository.Save();
+            logDTOService.Add(log);
+            logDTOService.Save();
 
             return response;
         }
