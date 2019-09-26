@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebApiApp;
 using WebApiApp.Controllers;
+using WebApiApp.Controllers.Auth;
 
 namespace WebApiApp.Tests.Controllers
 {
@@ -9,17 +10,31 @@ namespace WebApiApp.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void LogIn()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            AuthController controller = new AuthController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.LogIn() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
+            Assert.AreEqual("Log In Page", result.ViewBag.Title);
+        }
+
+        [TestMethod]
+        public void Register()
+        {
+            // Arrange
+            AuthController controller = new AuthController();
+
+            // Act
+            ViewResult result = controller.Register() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Register Page", result.ViewBag.Title);
         }
     }
 }

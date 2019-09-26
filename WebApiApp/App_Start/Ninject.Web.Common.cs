@@ -70,8 +70,8 @@ namespace WebApiApp.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<DateRangeDTOService>().To<DateRangeDTOService>();
-            kernel.Bind<LogDTOService>().To<LogDTOService>();
+            kernel.Bind<IEntityService<DateRangeDTO>>().To<DateRangeDTOService>();
+            kernel.Bind<IEntityService<LogDTO>>().To<LogDTOService>();
             kernel.Bind<IMapper<Log, LogDTO>>().To<LogMapper>();
             kernel.Bind<IMapper<DateRange, DateRangeDTO>>().To<DateRangeMapper>();
             kernel.Bind<DbContext>().To<WebApiAppContext>();

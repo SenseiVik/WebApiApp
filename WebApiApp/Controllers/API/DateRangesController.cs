@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using WebApiApp.BOL.DTO;
+using WebApiApp.BOL.Service.Interfaces;
 using WebApiApp.BOL.Service.Services;
 
 namespace WebApiApp.Controllers.API
@@ -10,10 +11,10 @@ namespace WebApiApp.Controllers.API
     [Authorize]
     public class DateRangesController : ApiController
     {
-        private DateRangeDTOService dateRangeDTOService;
-        private LogDTOService logDTOService;
+        private IEntityService<DateRangeDTO> dateRangeDTOService;
+        private IEntityService<LogDTO> logDTOService;
 
-        public DateRangesController(DateRangeDTOService dateRangeService, LogDTOService logService)
+        public DateRangesController(IEntityService<DateRangeDTO> dateRangeService, IEntityService<LogDTO> logService)
         {
             this.dateRangeDTOService = dateRangeService;
             this.logDTOService = logService;

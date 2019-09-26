@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApiApp.BOL.Service.Interfaces
 {
-    interface IEntityService<DtoObj> where DtoObj : class, new()
+    public interface IEntityService<DtoObj> where DtoObj : class, new()
     {
         IEnumerable<DtoObj> GetAll();
         DtoObj Get(int id);
